@@ -7,10 +7,13 @@ import { useState, useEffect } from "react";
 function App() {
   const [countriesInfo, setCountriesInfo] = useState([]);
   const [randomContries, setRandomCountries] = useState([]);
+  const [inputInfo, setInputInfo] = useState('');
+  const [selectInfo, setSelectInfo] = useState('');
 
   useEffect(() => {
     getDataCountries();
   }, []);
+  
 
   function getDataCountries() {
     const path = './src/data/data.json';
@@ -20,9 +23,17 @@ function App() {
         setCountriesInfo(data)
         getRandomCountries(data);
       });
-    
+  }
+
+  const handleInput = (e) => {
+    setInputInfo(e.target.value);
+  }
+  const handleSelect = (e) => {
+    setSelectInfo(e.target.value);
     
   }
+  
+
   function getRandomCountries(data) {
     const numCountries = 8;
     const randomCountries = [];
@@ -33,27 +44,52 @@ function App() {
     setRandomCountries(randomCountries);
   }
 
-  console.log(randomContries)
+  function searchCountries(data, inputInfo, selectInfo) {
+    const searchTerm = inputInfo.toLowerCase();
+    const regionFilter = selectInfo.toLowerCase();
+  
+    return data.filter((country) => {
+      const nameMatch = country.name.toLowerCase().startsWith(searchTerm);
+      const regionMatch = regionFilter === "" || country.region.toLowerCase() === regionFilter;
+      return nameMatch && regionMatch;
+    });
+  }
+
+
+  const filteredCountries = searchCountries(countriesInfo, inputInfo, selectInfo);
+
 
   return (
     <>
       <div className="general-container">
-        <SearchFilter/>
-        <div className="">
-        {randomContries.map(({name, flag, population, region, capital}, index) => (
-            <Flag 
-            key={index}
-            flag={flag}
-            countryName={name}
-            population={population}
-            region={region}
-            capital={capital}
-            />    
-        ))}
-      
+        <SearchFilter handleInput={handleInput} handleSelect={handleSelect}/>
+        <div className="flags-main-container">
+          {inputInfo === '' ? (
+
+            randomContries.map(({ name, flag, population, region, capital }, index) => (
+              <Flag 
+                key={index}
+                flag={flag}
+                countryName={name}
+                population={population}
+                region={region}
+                capital={capital}
+              />    
+            ))
+          ) : (
+            filteredCountries.map(({ name, flag, population, region, capital }, index) => (
+              <Flag 
+                key={index}
+                flag={flag}
+                countryName={name}
+                population={population}
+                region={region}
+                capital={capital}
+              />    
+            ))
+          )}
         </div>
       </div>
-      
     </>
   );
 }
