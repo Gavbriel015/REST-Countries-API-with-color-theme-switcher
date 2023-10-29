@@ -3,10 +3,11 @@ import SearchFilter from "./components/Search_Filter";
 import './sass/search_filter.sass'
 
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-function App() {
+function CountriesContainer (){
   const [countriesInfo, setCountriesInfo] = useState([]);
-  const [randomContries, setRandomCountries] = useState([]);
+  const [randomCountries, setRandomCountries] = useState([]);
 
   useEffect(() => {
     getDataCountries();
@@ -33,28 +34,35 @@ function App() {
     setRandomCountries(randomCountries);
   }
 
-  console.log(randomContries)
-
   return (
-    <>
-      <div className="general-container">
+    <div className="general-container">
         <SearchFilter/>
         <div className="">
-        {randomContries.map(({name, flag, population, region, capital}, index) => (
+        {randomCountries.map(({name, flag, population, region, capital}, index) => (
+          <Link to={`/countries/${name}`} key={name}>
             <Flag 
-            key={index}
             flag={flag}
             countryName={name}
             population={population}
             region={region}
             capital={capital}
-            />    
+            />
+          </Link>    
         ))}
       
         </div>
-      </div>
-      
-    </>
+    </div>
+  )
+}
+function App() {
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CountriesContainer/>}></Route>
+        <Route path="/countries/:name" element={<p>This will be replaced with the second page</p>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
