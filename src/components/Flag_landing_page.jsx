@@ -2,7 +2,16 @@ import { produce } from "immer";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import "../sass/flag_landing_page.sass"
+import { Link } from "react-router-dom";
 
+const BackButton = () => {
+    return (
+        <Link to="/" className="back-button">
+            <img src="../src/assets/arrow-left-solid.svg" alt="" />
+            <p>Back</p>
+        </Link>
+    )
+}
 export default function FlagLandingPage(){
     const [countryData, setCountryData] = useState(0)
     const [borderCountries, setBorderCountries] = useState([])
@@ -43,6 +52,7 @@ export default function FlagLandingPage(){
     }, [])
     return (
         <article className="landing-page-container">
+            <BackButton/>
             <div className="flag">
                 <img src={countryData.flag} alt={`Flag of ${countryData.name}`} />
             </div>
