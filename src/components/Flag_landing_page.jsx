@@ -1,7 +1,7 @@
 import { produce } from "immer";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-
+import "../sass/flag_landing_page.sass"
 
 export default function FlagLandingPage(){
     const [countryData, setCountryData] = useState(0)
@@ -64,7 +64,9 @@ export default function FlagLandingPage(){
                 </div>
                 <div className="borderCountries">
                     <h3>Border Countries:</h3>
+                    <div className="container">
                     {borderCountries.map((country) => <p className="border-country" key={country}>{country}</p>)}
+                    </div>
                 </div>
             </aside>
         </article>

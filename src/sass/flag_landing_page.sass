@@ -1,0 +1,42 @@
+$very-light-gray: hsl(0, 0%, 98)
+$dark-gray: hsl(0, 0%, 52%)
+img
+    width: 100%
+.landing-page-container
+    display: flex
+    flex-direction: column
+    margin-top: 2rem
+    font-family: 'Nunito Sans', sans-serif
+    background-color: $very-light-gray
+    padding: 0 1rem
+    .flag
+        width: 90%
+        margin: 0 auto
+    .information-container
+        display: flex
+        flex-direction: column
+        background-color: $very-light-gray
+        padding: 0.2rem
+        margin: 0
+        .general-data
+            display: flex
+            flex-direction: column
+            .property-title
+                font-weight: bolder
+            .property
+                font-weight: 100
+        .borderCountries
+            width: 100%
+            .container
+                display: flex
+                flex-wrap: wrap
+                gap: 1rem
+                width: 100%
+                text-align: center
+                justify-content: flex-start
+                .border-country
+                    background-color: #fff
+                    border: 5px solid $very-light-gray
+                    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5)
+                    border-radius: 10px
+                    padding: 0.25rem
