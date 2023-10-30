@@ -68,7 +68,7 @@ export default function CountriesContainer() {
             key={index}
             flag={flag}
             countryName={name}
-            population={population}
+            population={population.toLocaleString()}
             region={region}
             capital={capital}
             />
@@ -80,7 +80,7 @@ export default function CountriesContainer() {
                   key={index} 
                   flag={flag}
                   countryName={name}
-                  population={population}
+                  population={population.toLocaleString()}
                   region={region}
                   capital={capital}
                 /> 

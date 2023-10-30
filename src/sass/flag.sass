@@ -4,19 +4,25 @@ body
     & h2
         margin: 0
 
-.container
-    max-height: 336px
-    max-width: 264px
-    .flag-container img 
-            max-width: 100%
-            display: block
-
 .flags-main-container
     display: flex
+    gap: 60px
+    flex-wrap: wrap
     justify-content: center
-    gap: 20px
-    max-width: 1280px
-    flex-wrap: wrap       
+    width: 80%
+    align-items: center
+
+.container
+    height: 336px
+    width: 264px
+
+.flag-container
+    max-width: 264px
+    height: 160px
+    .flag
+        width: 100%
+        object-fit: cover
+        height: 100%
 
 .information-container
     padding: 25px 15px
@@ -32,6 +38,7 @@ body
         font-size: 20px
         padding-bottom: 15px
         font-weight: bold
+
 
 // Resseting a styles
 a

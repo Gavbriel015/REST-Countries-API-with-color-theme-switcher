@@ -50,11 +50,14 @@ export default function FlagLandingPage(){
     useEffect(() => {
         getDataCountry(name)
     }, [])
+
+    const { flag } = countryData
+
     return (
         <article className="landing-page-container">
             <BackButton/>
             <div className="flag">
-                <img src={countryData.flag} alt={`Flag of ${countryData.name}`} />
+                <img src={flag} alt={`Flag of ${countryData.name}`} />
             </div>
             <aside className="information-container">
                 <h1>{countryData.name}</h1>

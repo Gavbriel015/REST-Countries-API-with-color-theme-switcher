@@ -7,13 +7,12 @@
     
 #root
     width: 100%
-.search-filter-container
+
+.search-container
     background-color: #fff
     display: flex
     gap: 15px
-    padding: 20px 20px
-    width: 80%
-    margin: 0px 20px
+    padding: 0px 15px
     svg
         width: 25px
     input
@@ -26,7 +25,25 @@
 .search-and-filter
     display: flex
     flex-direction: column
-    
+    gap: 15px
+    width: 80%
+    margin: 15px 0px
 
+.filter-container
+  select
+    padding: 20px
+    border: none
+    &:focus
+      border: none
+  option
+    padding: 10px
+    &:hover
+      background-color: white
 
-    
+.hidden
+    display: none
+
+@media (min-width: 640px)
+    .search-and-filter
+        flex-direction: row
+        justify-content: space-between
