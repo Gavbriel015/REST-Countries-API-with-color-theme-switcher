@@ -60,36 +60,39 @@ export default function CountriesContainer() {
 
     return(
         <div className="general-container">
-        <SearchFilter handleInput={handleInput} handleSelect={handleSelect}/>
-        <div className="flags-main-container">
-        {inputInfo === '' ? (randomCountries.map(({name, flag, population, region, capital}, index) => (
-          <Link to={`/countries/${name}`} key={name}>
-            <Flag 
-            key={index}
-            flag={flag}
-            countryName={name}
-            population={population.toLocaleString()}
-            region={region}
-            capital={capital}
-            />
-          </Link>    
-        ))) : (
-            filteredCountries.map(({ name, flag, population, region, capital }, index ) => (
-              <Link to={`/countries/${name}`} key={name}>
-                <Flag
-                  key={index} 
-                  flag={flag}
-                  countryName={name}
-                  population={population.toLocaleString()}
-                  region={region}
-                  capital={capital}
-                /> 
-              </Link>   
-            ))
-          )
-      }
-      
-        </div>
-    </div>
-    )
+          <SearchFilter handleInput={handleInput} handleSelect={handleSelect}/>
+          <div className="flags-main-container ">
+          {inputInfo === '' ? (
+              randomCountries.map(({ name, flag, population, region, capital }, index) => (
+                selectInfo === '' || selectInfo === region ? (
+                  <Link to={`/countries/${name}`} key={name}>
+                    <Flag
+                      key={index}
+                      flag={flag}
+                      countryName={name}
+                      population={population.toLocaleString()}
+                      region={region}
+                      capital={capital}
+                    />
+                  </Link>
+                ) : null
+              ))
+            ) : (
+              filteredCountries.map(({ name, flag, population, region, capital }, index) => (
+                <Link to={`/countries/${name}`} key={name}>
+                  <Flag
+                    key={index}
+                    flag={flag}
+                    countryName={name}
+                    population={population.toLocaleString()}
+                    region={region}
+                    capital={capital}
+                  />
+                </Link>
+              )))
+            }
+        
+          </div>
+      </div>
+      )
 }
