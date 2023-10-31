@@ -81,3 +81,31 @@ img
                 background-color: $dark-blue
                 color: #fff
                 border: 5px solid $dark-blue
+
+.general-purpose-flag-landing-page-container.dark
+    background-color: $dark-blue
+
+@media (min-width: 1000px)
+    .general-purpose-flag-landing-page-container.dark
+        height: 100vh
+    .back-button
+        left: 20px
+    .landing-page-container
+        flex-direction: row
+        padding-top: 3rem
+        padding-left: 20px
+        .flag
+            width: 40%
+        .information-container
+            width: 60%
+            align-items: flex-start
+            margin-left: 3rem
+            .general-data
+                flex-direction: row
+                width: 100%
+                justify-content: space-between
+        .borderCountries
+            display: flex
+@media (max-width: 1000px)
+    .general-purpose-flag-landing-page-container.dark
+        height: 150vh

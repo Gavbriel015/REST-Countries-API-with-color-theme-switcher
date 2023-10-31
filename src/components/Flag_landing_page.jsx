@@ -57,8 +57,9 @@ export default function FlagLandingPage(){
     let theme = useTheme()
 
     return (
+        <div className={`general-purpose-flag-landing-page-container ${theme ? 'dark' : ''}`}>
+        <BackButton/>
         <article className={`landing-page-container ${theme ? 'dark' : ''}`}>
-            <BackButton/>
             <div className="flag">
                 <img src={flag} alt={`Flag of ${countryData.name}`} />
             </div>
@@ -86,5 +87,6 @@ export default function FlagLandingPage(){
                 </div>
             </aside>
         </article>
+    </div>
     )
 }
