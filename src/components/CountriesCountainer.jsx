@@ -7,6 +7,8 @@ import { useTheme } from './ThemeProvider';
 
 import { useState, useEffect } from "react";
 
+import data from '../data/data.json'
+
 export default function CountriesContainer() {
     const [countriesInfo, setCountriesInfo] = useState([]);
     const [randomCountries, setRandomCountries] = useState([]);
@@ -28,13 +30,8 @@ export default function CountriesContainer() {
     
 
     function getDataCountries() {
-        const path = './src/data/data.json';
-        fetch(path)
-        .then(res => res.json())
-        .then(data => {
-            setCountriesInfo(data)
-            getRandomCountries(data);
-        });
+        setCountriesInfo(data)
+        getRandomCountries(data)
     }
 
     const handleInput = (e) => {
