@@ -5,6 +5,9 @@ import "../sass/flag_landing_page.sass"
 import { Link } from "react-router-dom";
 import { useTheme } from './ThemeProvider'
 
+// Data
+import data from '../data/data.json'
+
 const BackButton = () => {
     let theme = useTheme()
     return (
@@ -18,34 +21,24 @@ export default function FlagLandingPage(){
     const [countryData, setCountryData] = useState(0)
     const [borderCountries, setBorderCountries] = useState([])
     const {name} = useParams()
-    console.log(name)
-    const path = '../src/data/data.json'
 
     const getCountryByAlphaCode= async (alphacode) => {
-        fetch(path)
-        .then(res => res.json())
-        .then(data => {
-            data = data.filter((element) => element.alpha3Code == alphacode)[0]
-            setBorderCountries(produce((draft) => {
-                draft.push(data.name)
-            }))
-        })
+        let filteredData = data.filter((element) => element.alpha3Code == alphacode)[0]
+        setBorderCountries(produce((draft) => {
+            draft.push(filteredData.name)
+        }))
     }
 
     function getDataCountry(name){
-        fetch(path)
-        .then(res => res.json())
-        .then(data => {
-            data = data.filter((element) => element.name == name ? true : false)[0]
-            if (data.borders){
-                data.borders.forEach((alpha3Code) => {
-                    getCountryByAlphaCode(alpha3Code)
-                })
-            }else{
-                setBorderCountries(['No countries at the borders.'])
-            }
-            setCountryData(data)
+        let filteredData = data.filter((element) => element.name == name ? true : false)[0]
+        if (filteredData.borders){
+            filteredData.borders.forEach((alpha3Code) => {
+            getCountryByAlphaCode(alpha3Code)
         })
+        }else{
+            setBorderCountries(['No countries at the borders.'])
+        }
+        setCountryData(filteredData)
     }
 
     
