@@ -1,15 +1,16 @@
 $very-light-gray: hsl(0, 0%, 98%)
 $dark-gray: hsl(0, 0%, 52%)
+$dark-blue: hsl(209, 23%, 22%)
+
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 img
     width: 100%
 .landing-page-container
     display: flex
     flex-direction: column
-    margin-top: 2rem
     font-family: 'Nunito Sans', sans-serif
     background-color: $very-light-gray
-    padding: 0 1rem
+    padding: 2rem 1rem
     .flag
         width: 90%
         margin: 0 auto
@@ -25,33 +26,86 @@ img
             .property-title
                 font-weight: bolder
             .property
-                font-weight: 100
+                font-weight: lighter
         .borderCountries
             width: 100%
             .container
-                display: flex
-                flex-wrap: wrap
-                gap: 1rem
+                display: grid
+                grid-template-columns: repeat(auto-fit, 96px)
                 width: 100%
-                text-align: center
-                justify-content: flex-start
+                gap: 1rem
                 .border-country
                     background-color: #fff
                     border: 5px solid $very-light-gray
                     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5)
                     border-radius: 10px
+                    font-size: 0.75rem
                     padding: 0.25rem
+                    height: auto
+                    max-height: 80px
+                    display: flex
+                    text-align: center
+                    align-items: center
+                    justify-content: center
 .back-button
     display: flex
     align-items: center
-    gap: 1rem
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5)
     border-radius: 10px
     margin-bottom: 2rem
-    width: 25%
+    gap: 0.5rem
     font-family: 'Nunito Sans', sans-serif
     padding: 0.2rem 1rem
     max-height: 32px
-    img
-        width: 18px
-        height: 18px
+    max-width: 136px
+    justify-content: center
+    svg
+        width: 20px
+        height: 20px
+
+.back-button.dark
+    background-color: $dark-blue
+    color: #fff
+    svg
+        fill: #fff
+
+
+.landing-page-container.dark
+    background-color: $dark-blue
+    .information-container
+        background-color: $dark-blue
+        color: #fff
+    .borderCountries
+        .container
+            .border-country
+                background-color: $dark-blue
+                color: #fff
+                border: 5px solid $dark-blue
+
+.general-purpose-flag-landing-page-container.dark
+    background-color: $dark-blue
+
+@media (min-width: 1000px)
+    .general-purpose-flag-landing-page-container.dark
+        height: 100vh
+    .back-button
+        left: 20px
+    .landing-page-container
+        flex-direction: row
+        padding-top: 3rem
+        padding-left: 20px
+        .flag
+            width: 40%
+        .information-container
+            width: 60%
+            align-items: flex-start
+            margin-left: 3rem
+            .general-data
+                flex-direction: row
+                width: 100%
+                justify-content: space-between
+        .borderCountries
+            display: flex
+@media (max-width: 1000px)
+    .general-purpose-flag-landing-page-container.dark
+        height: 150vh
