@@ -1,12 +1,13 @@
 import '../sass/flag.sass'
+import { useTheme } from './ThemeProvider'
 
 // eslint-disable-next-line react/prop-types
 export default function Flag({flag ,countryName, population, region, capital}){
-
+    const theme = useTheme();
 
     return (
         <>
-            <div className="container">
+            <div className={`container ${theme ? 'dark' : 'light'}`}>
                 <div className="flag-container">
                     <img className='flag' src={flag} alt="Country Flag" />
                 </div>

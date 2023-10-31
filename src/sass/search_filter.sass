@@ -1,9 +1,16 @@
+$light-gray: #2b3844
+$dark-gray: #202c36
+    
 .general-container
     background-color: #FAFAFA
     display: flex
     width: 100%
     flex-direction: column
     align-items: center
+
+
+.general-container.dark
+    background-color: #202c36
     
 #root
     width: 100%
@@ -11,8 +18,6 @@
 .search-container
     background-color: #fff
     display: flex
-    gap: 15px
-    padding: 0px 15px
     svg
         width: 25px
     input
@@ -47,3 +52,16 @@
     .search-and-filter
         flex-direction: row
         justify-content: space-between
+
+.search-and-filter.dark
+    background-color: $dark-gray
+    .search-container
+        input, svg
+            background-color: $light-gray
+            color: #fff
+            &::placeholder
+                color: #fff
+    .filter-container
+        select
+            background-color: $light-gray
+            color: #fff

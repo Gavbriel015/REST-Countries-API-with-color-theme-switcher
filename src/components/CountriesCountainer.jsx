@@ -3,6 +3,8 @@ import SearchFilter from "./Search_Filter";
 import '../sass/search_filter.sass'
 import { Link } from "react-router-dom";
 
+import { useTheme } from './ThemeProvider';
+
 import { useState, useEffect } from "react";
 
 export default function CountriesContainer() {
@@ -10,10 +12,19 @@ export default function CountriesContainer() {
     const [randomCountries, setRandomCountries] = useState([]);
     const [inputInfo, setInputInfo] = useState('');
     const [selectInfo, setSelectInfo] = useState('');
+    const theme = useTheme();
 
     useEffect(() => {
         getDataCountries();
     }, []);
+
+    useEffect(() => {
+      if (theme) {
+        document.body.style.backgroundColor = "#202c36";
+      } else {
+        document.body.style.backgroundColor = "";
+      }
+    },[theme])
     
 
     function getDataCountries() {
@@ -59,7 +70,7 @@ export default function CountriesContainer() {
     const filteredCountries = searchCountries(countriesInfo, inputInfo, selectInfo);
 
     return(
-        <div className="general-container">
+        <div className={`general-container ${theme ? 'dark' : 'light'}`}>
           <SearchFilter handleInput={handleInput} handleSelect={handleSelect}/>
           <div className="flags-main-container ">
           {inputInfo === '' ? (
