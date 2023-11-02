@@ -53,38 +53,69 @@ export default function CountriesContainer() {
         setRandomCountries(randomCountries);
     }
 
-    function searchCountries(data, inputInfo, selectInfo) {
-        const searchTerm = inputInfo.toLowerCase();
-        const regionFilter = selectInfo.toLowerCase();
+    function getRandomCountriesByRegion(data, region) {
+        const regionCountries = data.filter(country => country.region.toLowerCase() === region.toLowerCase());
     
-        return data.filter((country) => {
+        if (regionCountries.length <= 8) {
+            return regionCountries;
+        }
+    
+        const regionCountriesCopy = [...regionCountries];
+        const randomCountries = [];
+    
+        for (let i = 0; i < 8; i++) {
+            const randomIndex = Math.floor(Math.random() * regionCountriesCopy.length);
+            const randomCountry = regionCountriesCopy.splice(randomIndex, 1)[0];
+            randomCountries.push(randomCountry);
+        }
+        return randomCountries;
+    }
+    
+    const region = selectInfo;
+    const randomCountriesByRegion = getRandomCountriesByRegion(countriesInfo, region);
+
+    function searchCountries(data, inputInfo, selectInfo) {
+      const searchTerm = inputInfo.toLowerCase();
+      const regionFilter = selectInfo.toLowerCase();
+  
+      return data.filter((country) => {
         const nameMatch = country.name.toLowerCase().startsWith(searchTerm);
         const regionMatch = regionFilter === "" || country.region.toLowerCase() === regionFilter;
         return nameMatch && regionMatch;
         });
-    }
-
-    const filteredCountries = searchCountries(countriesInfo, inputInfo, selectInfo);
+  }
+  
+  const filteredCountries = searchCountries(countriesInfo, inputInfo, selectInfo);
+    
 
     return(
         <div className={`general-container ${theme ? 'dark' : 'light'}`}>
           <SearchFilter handleInput={handleInput} handleSelect={handleSelect}/>
           <div className="flags-main-container ">
           {inputInfo === '' ? (
-              randomCountries.map(({ name, flag, population, region, capital }, index) => (
-                selectInfo === '' || selectInfo === region ? (
-                  <Link to={`/countries/${name}`} key={name}>
-                    <Flag
-                      key={index}
-                      flag={flag}
-                      countryName={name}
-                      population={population.toLocaleString()}
-                      region={region}
-                      capital={capital}
-                    />
-                  </Link>
-                ) : null
-              ))
+              selectInfo === '' ? (randomCountries.map(({ name, flag, population, region, capital }, index) => (
+                <Link to={`/countries/${name}`} key={name}>
+                  <Flag
+                    key={index}
+                    flag={flag}
+                    countryName={name}
+                    population={population.toLocaleString()}
+                    region={region}
+                    capital={capital}
+                  />
+                </Link>
+            ))) : (randomCountriesByRegion.map(({ name, flag, population, region, capital }, index) => (
+              <Link to={`/countries/${name}`} key={name}>
+                <Flag
+                  key={index}
+                  flag={flag}
+                  countryName={name}
+                  population={population.toLocaleString()}
+                  region={region}
+                  capital={capital}
+                />
+              </Link>
+          )))
             ) : (
               filteredCountries.map(({ name, flag, population, region, capital }, index) => (
                 <Link to={`/countries/${name}`} key={name}>
